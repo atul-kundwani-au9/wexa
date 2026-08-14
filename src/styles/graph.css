@@ -1,0 +1,122 @@
+@import "./tokens.css";
+
+.graph-wrap {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(91, 141, 239, 0.05), transparent 60%),
+    var(--panel-inset);
+  overflow: hidden;
+}
+
+.graph-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ring {
+  fill: none;
+  stroke: var(--hairline);
+  stroke-dasharray: 2 5;
+}
+
+.ring-label {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+}
+
+.edge-line {
+  stroke: var(--hairline-bright);
+  stroke-width: 1;
+}
+
+.node-epicenter circle.node-disc {
+  fill: var(--signal-critical);
+}
+
+.node-epicenter .node-pulse {
+  fill: none;
+  stroke: var(--signal-critical);
+  stroke-width: 2;
+  opacity: 0.55;
+  animation: epicenter-pulse 2.2s ease-out infinite;
+}
+
+@keyframes epicenter-pulse {
+  0% {
+    r: 12;
+    opacity: 0.55;
+  }
+  100% {
+    r: 34;
+    opacity: 0;
+  }
+}
+
+.node-disc {
+  stroke: var(--ink);
+  stroke-width: 2;
+  cursor: pointer;
+  transition: r 0.12s ease;
+}
+
+.node-hop-1 .node-disc {
+  fill: var(--signal-critical);
+}
+.node-hop-2 .node-disc {
+  fill: var(--signal-high);
+}
+.node-hop-3 .node-disc {
+  fill: var(--signal-medium);
+}
+.node-hop-rest .node-disc {
+  fill: var(--accent);
+}
+
+.node-label {
+  fill: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  pointer-events: none;
+}
+
+.node-group:hover .node-disc {
+  r: 8;
+}
+
+.node-group:hover .node-label {
+  fill: var(--text-primary);
+}
+
+.node-group.selected .node-disc {
+  stroke: var(--text-primary);
+}
+
+.graph-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.legend-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-swatch::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dot-color, var(--accent));
+}
